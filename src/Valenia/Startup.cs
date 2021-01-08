@@ -1,14 +1,11 @@
-using System.Data.Common;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Raven.Client.Documents;
 using Valenia.Infrastructure.Application;
 using Valenia.Infrastructure.Application.AutomaticDependencyInjection;
-using Valenia.Infrastructure.Persistence;
 
 namespace Valenia
 {
@@ -23,9 +20,18 @@ namespace Valenia
 
         public void ConfigureServices(IServiceCollection services)
         {
+            var store = new DocumentStore
+            {
+                Urls = new[] { "http://localhost:8080" },
+                Database = "ValeniaDb",
+                Conventions =
+                {
+                    FindIdentityProperty = x => x.Name == "DbId"
+                }
+            };
+            services.AddScoped(c => store.OpenAsyncSession());
+            store.Initialize();
             const string connectionString = "Server=localhost;Database=ValeniaDb;User Id=sa;Password=zaq1@WSX;";
-            services.AddDbContext<ValeniaDbContext>(options => options.UseSqlServer(connectionString));
-            services.AddScoped<DbConnection>(c => new SqlConnection(connectionString));
             services.AddDependencies();
             services.AddControllers();
             services.AddSwagger();

@@ -5,13 +5,6 @@ namespace Valenia.Domain.Visas.Requirements
 {
     public class Requirement : Entity<RequirementId>
     {
-        public Guid RequirementId
-        {
-            get => Id.Value;
-            set { }
-        }
-        protected Requirement() {}
-
         public RequirementName Name { get; private set; }
         public RequirementDescription Description { get; private set; }
         public RequirementExample Example { get; private set; }

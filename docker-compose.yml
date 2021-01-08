@@ -1,12 +1,11 @@
-version: '3'
+version: '3.5'
 
 services:
-  mssql:
-    container_name: 'valenia-mssql'
-    image: 'mcr.microsoft.com/mssql/server:2019-latest'
+  ravendb:
+    container_name: valenia-ravendb
+    image: ravendb/ravendb
     ports:
-      - '1433:1433'
+      - 8080:8080
     environment:
-      SA_PASSWORD: 'zaq1@WSX'
-      ACCEPT_EULA: 'Y'
-      MSSQL_PID: 'Express'
+      - RAVEN_Security_UnsecuredAccessAllowed=PublicNetwork
+      - RAVEN_ARGS="--Setup.Mode=None"
