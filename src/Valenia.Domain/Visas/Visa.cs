@@ -8,17 +8,24 @@ namespace Valenia.Domain.Visas
 {
     public class Visa : AggregateRoot<VisaId>
     {
-        public Guid VisaId { get; private set; }
+        private string DbId
+        {
+            get => $"Visa/{Id.Value}";
+            set { }
+        }
 
-        protected Visa() {}
+        protected Visa()
+        {
+        }
 
         public VisaGoal Goal { get; set; }
         public VisaType Type { get; set; }
         public VisaExpectedProcessingTime ExpectedProcessingTime { get; set; }
-        public List<Requirement> Requirements { get; set; } = new List<Requirement>();
+        public List<Requirement> Requirements { get; set; }
 
         public Visa(VisaId id, VisaType type)
         {
+            Requirements = new List<Requirement>();
             Apply(new VisaEvents.Created
             {
                 Id = id,
@@ -67,38 +74,37 @@ namespace Valenia.Domain.Visas
 
         public void UpdateRequirementName(RequirementId requirementId, RequirementName name)
         {
-            var requirement = FindRequirement(requirementId);
-            if (requirement == null)
-                throw new InvalidOperationException("Cannot update the name of a non-existing requirement");
-
-            requirement.UpdateName(name);
+            Apply(new RequirementEvents.NameChanged{
+                Id = requirementId,
+                Name = name
+            });
         }
 
         public void UpdateRequirementDescription(RequirementId requirementId, RequirementDescription description)
         {
-            var requirement = FindRequirement(requirementId);
-            if (requirement == null)
-                throw new InvalidOperationException("Cannot update the description of a non-existing requirement");
-
-            requirement.UpdateDescription(description);
+            Apply(new RequirementEvents.DescriptionChanged
+            {
+                Id = requirementId,
+                Description = description
+            });
         }
 
         public void UpdateRequirementExample(RequirementId requirementId, RequirementExample example)
         {
-            var requirement = FindRequirement(requirementId);
-            if (requirement == null)
-                throw new InvalidOperationException("Cannot update the example of a non-existing requirement");
-
-            requirement.UpdateExample(example);
+            Apply(new RequirementEvents.ExampleChanged
+            {
+                Id = requirementId,
+                Example = example
+            });
         }
 
         protected override void When(object @event)
         {
+            Requirement requirement;
             switch (@event)
             {
                 case VisaEvents.Created e:
                     Id = new VisaId(e.Id);
-                    VisaId = e.Id;
                     Type = e.Type;
                     Goal = VisaGoal.NoGoal;
                     ExpectedProcessingTime = VisaExpectedProcessingTime.NoExpectedProcessingTime;
@@ -112,10 +118,23 @@ namespace Valenia.Domain.Visas
                 case VisaEvents.ExceptedProcessingTimeChanged e:
                     ExpectedProcessingTime = new VisaExpectedProcessingTime(e.ExceptedProcessingTime);
                     break;
+
                 case RequirementEvents.AddedToVisa e:
-                    var requirement = new Requirement(Apply);
+                    requirement = new Requirement(Apply);
                     ApplyToEntity(requirement, e);
                     Requirements.Add(requirement);
+                    break;
+                case RequirementEvents.NameChanged e:
+                    requirement = FindRequirement(new RequirementId(e.Id));
+                    ApplyToEntity(requirement, e);
+                    break;
+                case RequirementEvents.ExampleChanged e:
+                    requirement = FindRequirement(new RequirementId(e.Id));
+                    ApplyToEntity(requirement, e);
+                    break;
+                case RequirementEvents.DescriptionChanged e:
+                    requirement = FindRequirement(new RequirementId(e.Id));
+                    ApplyToEntity(requirement, e);
                     break;
             }
         }
@@ -125,6 +144,14 @@ namespace Valenia.Domain.Visas
             //
         }
 
-        private Requirement FindRequirement(RequirementId id) => Requirements.FirstOrDefault(r => r.Id == id);
+        private Requirement FindRequirement(RequirementId id)
+        {
+            var requirement = Requirements.FirstOrDefault(r => r.Id == id);
+            if (requirement == null)
+                throw new InvalidOperationException("Cannot update a non-existing requirement");
+
+            return requirement;
+        }
+
     }
 }

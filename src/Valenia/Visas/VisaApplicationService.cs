@@ -62,7 +62,6 @@ namespace Valenia.Visas
                     );
 
                 operation(visa);
-
                 await _unitOfWork.Commit();
             }
             catch (Exception e)

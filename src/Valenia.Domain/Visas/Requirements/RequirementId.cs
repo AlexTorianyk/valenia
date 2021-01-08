@@ -5,9 +5,9 @@ namespace Valenia.Domain.Visas.Requirements
 {
     public class RequirementId : Value<RequirementId>
     {
+        public Guid Value { get; internal set; }
         protected RequirementId() { }
         public RequirementId(Guid value) => Value = value;
-        public Guid Value { get; }
 
         public static implicit operator Guid(RequirementId self) => self.Value;
 
