@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Valenia.Common;
+using Valenia.Domain.Shared.Exceptions;
 using Valenia.Domain.Visas.Requirements;
 
 namespace Valenia.Domain.Visas
@@ -141,7 +142,16 @@ namespace Valenia.Domain.Visas
 
         protected override void EnsureValidState()
         {
-            //
+            var valid = Id != null;
+            if (!Requirements.Any()) return;
+            if (ExpectedProcessingTime == VisaExpectedProcessingTime.NoExpectedProcessingTime)
+            {
+                valid = false;
+            }
+
+            if (!valid)
+                throw new Exceptions.InvalidEntityState(this,
+                    $"Post-checks failed for Visa {Id}");
         }
 
         private Requirement FindRequirement(RequirementId id)

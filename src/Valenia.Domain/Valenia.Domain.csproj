@@ -8,8 +8,4 @@
     <ProjectReference Include="..\Valenia.Common\Valenia.Common.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Shared\Exceptions\" />
-  </ItemGroup>
-
 </Project>

@@ -10,33 +10,6 @@ namespace Valenia.Domain.Visas.Requirements
         public RequirementExample Example { get; private set; }
         public VisaId ParentId { get; private set; }
 
-        public void UpdateName(RequirementName name)
-        {
-            Apply(new RequirementEvents.NameChanged
-            {
-                Id = Id,
-                Name = name
-            });
-        }
-
-        public void UpdateDescription(RequirementDescription description)
-        {
-            Apply(new RequirementEvents.DescriptionChanged
-            {
-                Id = Id,
-                Description = description
-            });
-        }
-
-        public void UpdateExample(RequirementExample example)
-        {
-            Apply(new RequirementEvents.ExampleChanged
-            {
-                Id = Id,
-                Example = example
-            });
-        }
-
         protected override void When(object @event)
         {
             switch (@event)
