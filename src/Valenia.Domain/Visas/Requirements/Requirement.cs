@@ -19,7 +19,7 @@ namespace Valenia.Domain.Visas.Requirements
 
         public void UpdateName(RequirementName name)
         {
-            Apply(new RequirementEvents.RequirementNameChanged
+            Apply(new RequirementEvents.NameChanged
             {
                 Id = Id,
                 Name = name
@@ -28,7 +28,7 @@ namespace Valenia.Domain.Visas.Requirements
 
         public void UpdateDescription(RequirementDescription description)
         {
-            Apply(new RequirementEvents.RequirementDescriptionChanged
+            Apply(new RequirementEvents.DescriptionChanged
             {
                 Id = Id,
                 Description = description
@@ -37,7 +37,7 @@ namespace Valenia.Domain.Visas.Requirements
 
         public void UpdateExample(RequirementExample example)
         {
-            Apply(new RequirementEvents.RequirementExampleChanged
+            Apply(new RequirementEvents.ExampleChanged
             {
                 Id = Id,
                 Example = example
@@ -48,20 +48,20 @@ namespace Valenia.Domain.Visas.Requirements
         {
             switch (@event)
             {
-                case RequirementEvents.RequirementAddedToVisa e:
+                case RequirementEvents.AddedToVisa e:
                     ParentId = new VisaId(e.VisaId);
                     Id = new RequirementId(e.RequirementId);
                     Name = new RequirementName(e.Name);
                     Description = new RequirementDescription(e.Description);
                     Example = new RequirementExample(e.Example);
                     break;
-                case RequirementEvents.RequirementNameChanged e:
+                case RequirementEvents.NameChanged e:
                     Name = new RequirementName(e.Name);
                     break;
-                case RequirementEvents.RequirementExampleChanged e:
+                case RequirementEvents.ExampleChanged e:
                     Example = new RequirementExample(e.Example);
                     break;
-                case RequirementEvents.RequirementDescriptionChanged e:
+                case RequirementEvents.DescriptionChanged e:
                     Description = new RequirementDescription(e.Description);
                     break;
             }

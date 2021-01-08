@@ -15,12 +15,11 @@ namespace Valenia.Domain.Visas
         public VisaGoal Goal { get; set; }
         public VisaType Type { get; set; }
         public VisaExpectedProcessingTime ExpectedProcessingTime { get; set; }
-        public List<Requirement> Requirements { get; set; }
+        public List<Requirement> Requirements { get; set; } = new List<Requirement>();
 
         public Visa(VisaId id, VisaType type)
         {
-            Requirements = new List<Requirement>();
-            Apply(new VisaEvents.VisaCreated
+            Apply(new VisaEvents.Created
             {
                 Id = id,
                 Type = type
@@ -29,7 +28,7 @@ namespace Valenia.Domain.Visas
 
         public void SetGoal(VisaGoal goal)
         {
-            Apply(new VisaEvents.VisaGoalChanged
+            Apply(new VisaEvents.GoalChanged
             {
                 Id = Id,
                 Goal = goal
@@ -38,27 +37,27 @@ namespace Valenia.Domain.Visas
 
         public void UpdateType(VisaType type)
         {
-            Apply(new VisaEvents.VisaTypeUpdated
+            Apply(new VisaEvents.TypeUpdated
             {
                 Id = Id,
                 Type = type
             });
         }
 
-        public void SetExpectedProcessingTime(int expectedProcessingTime)
+        public void SetExpectedProcessingTime(VisaExpectedProcessingTime expectedProcessingTime)
         {
-            Apply(new VisaEvents.VisaExceptedProcessingTimeChanged
+            Apply(new VisaEvents.ExceptedProcessingTimeChanged
             {
                 Id = Id,
-                ExceptedProcessingTime = expectedProcessingTime
+                ExceptedProcessingTime = expectedProcessingTime.Days
             });
         }
 
         public void AddRequirement(RequirementName name, RequirementDescription description, RequirementExample example)
         {
-            Apply(new RequirementEvents.RequirementAddedToVisa
+            Apply(new RequirementEvents.AddedToVisa
             {
-                RequirementId = new Guid(),
+                RequirementId = Guid.NewGuid(),
                 VisaId = Id,
                 Name = name,
                 Description = description,
@@ -97,23 +96,23 @@ namespace Valenia.Domain.Visas
         {
             switch (@event)
             {
-                case VisaEvents.VisaCreated e:
+                case VisaEvents.Created e:
                     Id = new VisaId(e.Id);
                     VisaId = e.Id;
                     Type = e.Type;
                     Goal = VisaGoal.NoGoal;
                     ExpectedProcessingTime = VisaExpectedProcessingTime.NoExpectedProcessingTime;
                     break;
-                case VisaEvents.VisaGoalChanged e:
+                case VisaEvents.GoalChanged e:
                     Goal = new VisaGoal(e.Goal);
                     break;
-                case VisaEvents.VisaTypeUpdated e:
+                case VisaEvents.TypeUpdated e:
                     Type = e.Type;
                     break;
-                case VisaEvents.VisaExceptedProcessingTimeChanged e:
+                case VisaEvents.ExceptedProcessingTimeChanged e:
                     ExpectedProcessingTime = new VisaExpectedProcessingTime(e.ExceptedProcessingTime);
                     break;
-                case RequirementEvents.RequirementAddedToVisa e:
+                case RequirementEvents.AddedToVisa e:
                     var requirement = new Requirement(Apply);
                     ApplyToEntity(requirement, e);
                     Requirements.Add(requirement);
@@ -123,7 +122,7 @@ namespace Valenia.Domain.Visas
 
         protected override void EnsureValidState()
         {
-            throw new NotImplementedException();
+            //
         }
 
         private Requirement FindRequirement(RequirementId id) => Requirements.FirstOrDefault(r => r.Id == id);
