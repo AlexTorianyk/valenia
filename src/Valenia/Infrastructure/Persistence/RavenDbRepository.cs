@@ -12,7 +12,7 @@ namespace Valenia.Infrastructure.Persistence
         private readonly IAsyncDocumentSession _session;
         private readonly Func<TId, string> _entityId;
 
-        public RavenDbRepository(
+        protected RavenDbRepository(
             IAsyncDocumentSession session,
             Func<TId, string> entityId)
         {
@@ -22,9 +22,6 @@ namespace Valenia.Infrastructure.Persistence
 
         public Task Add(T entity)
             => _session.StoreAsync(entity, _entityId(entity.Id));
-
-        public Task<bool> Exists(TId id)
-            => _session.Advanced.ExistsAsync(_entityId(id));
 
         public Task<T> Load(TId id)
             => _session.LoadAsync<T>(_entityId(id));

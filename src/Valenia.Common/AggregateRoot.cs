@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-namespace Valenia.Common
+﻿namespace Valenia.Common
 {
     public abstract class AggregateRoot<TId> : IInternalEventHandler
         where TId : Value<TId>
@@ -10,20 +7,11 @@ namespace Valenia.Common
 
         protected abstract void When(object @event);
 
-        private readonly List<object> _changes;
-
-        protected AggregateRoot() => _changes = new List<object>();
-
         protected void Apply(object @event)
         {
             When(@event);
             EnsureValidState();
-            _changes.Add(@event);
         }
-
-        public IEnumerable<object> GetChanges() => _changes.AsEnumerable();
-
-        public void ClearChanges() => _changes.Clear();
 
         protected abstract void EnsureValidState();
 
