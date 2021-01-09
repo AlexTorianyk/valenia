@@ -21,11 +21,11 @@ namespace Valenia.Domain.Visas.Requirements
 
         private static void CheckValidity(string value)
         {
-            if (value.Length > 100)
-                throw new ArgumentOutOfRangeException(nameof(value), "Requirement name cannot be longer than 100 characters");
-
             if (value.IsEmpty())
                 throw new ArgumentNullException(nameof(RequirementName));
+
+            if (value.Length > 100)
+                throw new ArgumentOutOfRangeException(nameof(value), "Requirement name cannot be longer than 100 characters");
         }
 
         public static RequirementName NoName => new RequirementName();
