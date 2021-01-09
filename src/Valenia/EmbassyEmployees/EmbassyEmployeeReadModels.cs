@@ -1,5 +1,5 @@
 ﻿using System;
-using Valenia.Domain.EmbassyEmployees;
+using Valenia.Domain.Users.EmbassyEmployees;
 
 namespace Valenia.EmbassyEmployees
 {

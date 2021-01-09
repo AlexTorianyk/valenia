@@ -1,17 +1,18 @@
 ﻿using System;
 using Valenia.Common;
 using Valenia.Domain.Shared.Exceptions;
+using Valenia.Domain.Users.Shared;
 
-namespace Valenia.Domain.EmbassyEmployees
+namespace Valenia.Domain.Users.EmbassyEmployees
 {
     public class EmbassyEmployee : AggregateRoot<EmbassyEmployeeId>
     {
-        public EmbassyEmployeeFullName FullName { get; set; }
-        public EmbassyEmployeeEmail Email { get; set; }
-        public EmbassyEmployeePassword Password { get; set; }
+        public FullName FullName { get; set; }
+        public Email Email { get; set; }
+        public Password Password { get; set; }
         public EmbassyEmployeeRole Role { get; set; }
 
-        public EmbassyEmployee(EmbassyEmployeeFullName fullName, EmbassyEmployeeEmail email, EmbassyEmployeePassword password, EmbassyEmployeeRole role)
+        public EmbassyEmployee(FullName fullName, Email email, Password password, EmbassyEmployeeRole role)
         {
             Apply(new EmbassyEmployeeEvents.Registered
             {
@@ -42,9 +43,9 @@ namespace Valenia.Domain.EmbassyEmployees
             {
                 case EmbassyEmployeeEvents.Registered e:
                     Id = new EmbassyEmployeeId(e.Id);
-                    FullName = EmbassyEmployeeFullName.FromString(e.FullName);
-                    Email = EmbassyEmployeeEmail.FromString(e.Email);
-                    Password = new EmbassyEmployeePassword(e.Password);
+                    FullName = FullName.FromString(e.FullName);
+                    Email = Email.FromString(e.Email);
+                    Password = new Password(e.Password);
                     Role = e.Role;
                     break;
                 case EmbassyEmployeeEvents.RoleUpdated e:

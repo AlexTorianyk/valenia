@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Valenia.Domain.EmbassyEmployees
+namespace Valenia.Domain.Users.EmbassyEmployees
 {
     public interface IEmbassyEmployeeRepository
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Valenia.Domain.EmbassyEmployees
+namespace Valenia.Domain.Users.EmbassyEmployees
 {
     public static class EmbassyEmployeeEvents
     {

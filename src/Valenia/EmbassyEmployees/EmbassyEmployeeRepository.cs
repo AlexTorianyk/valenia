@@ -1,5 +1,5 @@
 ﻿using Raven.Client.Documents.Session;
-using Valenia.Domain.EmbassyEmployees;
+using Valenia.Domain.Users.EmbassyEmployees;
 using Valenia.Infrastructure.Application.AutomaticDependencyInjection;
 using Valenia.Infrastructure.Persistence;
 
