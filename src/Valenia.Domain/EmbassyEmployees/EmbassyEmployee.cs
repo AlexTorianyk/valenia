@@ -27,17 +27,13 @@ namespace Valenia.Domain.EmbassyEmployees
         {
             Apply(new EmbassyEmployeeEvents.RoleUpdated
             {
-                Id = Id,
                 Role = role
             });
         }
 
         public void Fire()
         {
-            Apply(new EmbassyEmployeeEvents.Fired
-            {
-                Id = Id
-            });
+            Apply(new EmbassyEmployeeEvents.Fired());
         }
 
         protected override void When(object @event)

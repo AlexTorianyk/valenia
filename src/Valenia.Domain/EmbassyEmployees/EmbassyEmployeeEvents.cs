@@ -15,13 +15,11 @@ namespace Valenia.Domain.EmbassyEmployees
 
         public class RoleUpdated
         {
-            public Guid Id { get; set; }
             public EmbassyEmployeeRole Role { get; set; }
         }
 
         public class Fired
         {
-            public Guid Id { get; set; }
         }
 
     }

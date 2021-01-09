@@ -28,7 +28,6 @@ namespace Valenia.Domain.Visas
         {
             Apply(new VisaEvents.GoalChanged
             {
-                Id = Id,
                 Goal = goal
             });
         }
@@ -37,7 +36,6 @@ namespace Valenia.Domain.Visas
         {
             Apply(new VisaEvents.TypeUpdated
             {
-                Id = Id,
                 Type = type
             });
         }
@@ -46,7 +44,6 @@ namespace Valenia.Domain.Visas
         {
             Apply(new VisaEvents.ExceptedProcessingTimeChanged
             {
-                Id = Id,
                 ExceptedProcessingTime = expectedProcessingTime.Days
             });
         }
