@@ -9,27 +9,17 @@ namespace Valenia.Domain.Visas
 {
     public class Visa : AggregateRoot<VisaId>
     {
-        private string DbId
-        {
-            get => $"Visa/{Id.Value}";
-            set { }
-        }
-
-        protected Visa()
-        {
-        }
-
         public VisaGoal Goal { get; set; }
         public VisaType Type { get; set; }
         public VisaExpectedProcessingTime ExpectedProcessingTime { get; set; }
         public List<Requirement> Requirements { get; set; }
 
-        public Visa(VisaId id, VisaType type)
+        public Visa(VisaType type)
         {
             Requirements = new List<Requirement>();
             Apply(new VisaEvents.Created
             {
-                Id = id,
+                Id = Guid.NewGuid(),
                 Type = type
             });
         }
@@ -163,5 +153,12 @@ namespace Valenia.Domain.Visas
             return requirement;
         }
 
+        private string DbId
+        {
+            get => $"Visa/{Id.Value}";
+            set { }
+        }
+
+        protected Visa() { }
     }
 }

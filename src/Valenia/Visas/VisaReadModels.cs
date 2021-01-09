@@ -5,9 +5,9 @@ using Valenia.Domain.Visas.Requirements;
 
 namespace Valenia.Visas
 {
-    public static class ReadModels
+    public static class VisaReadModels
     {
-        public class VisaDetails
+        public class Details
         {
             public Guid VisaId { get; set; }
             public string Goal { get; set; }
@@ -15,7 +15,7 @@ namespace Valenia.Visas
             public int ExpectedProcessingTime { get; set; }
         }
 
-        public class VisaGoal
+        public class Goals
         {
             public Guid VisaId { get; set; }
             public string Goal { get; set; }

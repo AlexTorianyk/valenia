@@ -7,18 +7,18 @@ using Valenia.Domain.Visas;
 
 namespace Valenia.Visas
 {
-    public static class Queries
+    public static class VisaQueries
     {
-        public static Task<List<ReadModels.VisaDetails>> Query(
+        public static Task<List<VisaReadModels.Details>> Query(
             this IAsyncDocumentSession session,
-            QueryModels.GetVisaDetails query
+            VisaQueryModels.GetDetails query
         )
         {
-            var lol = session.Query<Visa>()
+           return session.Query<Visa>()
                 .Where(x => x.Id.Value == query.VisaId)
                 .Select(
                     x =>
-                        new ReadModels.VisaDetails
+                        new VisaReadModels.Details
                         {
                             VisaId = x.Id.Value,
                             Goal = x.Goal.Value,
@@ -26,33 +26,32 @@ namespace Valenia.Visas
                             ExpectedProcessingTime = x.ExpectedProcessingTime.Days
                         }
                 ).ToListAsync();
-
-            return lol;
         }
-        public static Task<List<ReadModels.VisaGoal>> Query(
+
+        public static Task<List<VisaReadModels.Goals>> Query(
             this IAsyncDocumentSession session,
-            QueryModels.GetVisaGoalsByType query
+            VisaQueryModels.GetGoalsByType query
         ) =>
             session.Query<Visa>()
                 .Where(x => x.Type == query.Type)
                 .Select(
                     x =>
-                        new ReadModels.VisaGoal
+                        new VisaReadModels.Goals
                         {
                             VisaId = x.Id.Value,
                             Goal = x.Goal.Value
                         }
                 ).PagedList(query.Page, query.PageSize);
 
-        public static Task<List<ReadModels.RequirementsDetails>> Query(
+        public static Task<List<VisaReadModels.RequirementsDetails>> Query(
             this IAsyncDocumentSession session,
-            QueryModels.GetVisaRequirements query
+            VisaQueryModels.GetRequirements query
         ) =>
             session.Query<Visa>()
                 .Where(x => x.Id.Value == query.VisaId)
                 .Select(
                     x =>
-                        new ReadModels.RequirementsDetails
+                        new VisaReadModels.RequirementsDetails
                         {
                             VisaId = x.Id.Value,
                             ExpectedProcessingTime = x.ExpectedProcessingTime.Days,

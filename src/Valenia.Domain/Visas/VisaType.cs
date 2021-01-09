@@ -2,8 +2,8 @@
 {
     public enum VisaType
     {
-        A = 1,
-        C = 2,
-        D = 3
+        A,
+        C,
+        D
     }
 }

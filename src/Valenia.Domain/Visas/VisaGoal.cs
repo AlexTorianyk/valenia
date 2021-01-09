@@ -5,6 +5,8 @@ namespace Valenia.Domain.Visas
 {
     public class VisaGoal : Value<VisaGoal>
     {
+        public string Value { get; internal set; }
+
         protected VisaGoal() { }
 
         public static VisaGoal FromString(string goal)
@@ -12,8 +14,6 @@ namespace Valenia.Domain.Visas
             CheckValidity(goal);
             return new VisaGoal(goal);
         }
-
-        public string Value { get; internal set; }
 
         internal VisaGoal(string value) => Value = value;
 

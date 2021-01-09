@@ -6,6 +6,5 @@ namespace Valenia.Domain.Visas
     {
         Task<Visa> Load(VisaId id);
         Task Add(Visa entity);
-        Task<bool> Exists(VisaId id);
     }
 }

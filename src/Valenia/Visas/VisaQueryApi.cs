@@ -10,25 +10,24 @@ namespace Valenia.Visas
     public class VisaQueryApi : Controller
     {
         private static readonly ILogger _log = Log.ForContext<VisaQueryApi>();
-
         private readonly IAsyncDocumentSession _session;
 
         public VisaQueryApi(IAsyncDocumentSession session)
             => _session = session;
 
         [HttpGet]
-        public Task<IActionResult> Get(QueryModels.GetVisaDetails request)
+        public Task<IActionResult> Get(VisaQueryModels.GetDetails request)
             => RequestHandler.HandleQuery(() => _session.Query(request), _log);
 
         [HttpGet]
         [Route("goals")]
-        public Task<IActionResult> Get(QueryModels.GetVisaGoalsByType request)
+        public Task<IActionResult> Get(VisaQueryModels.GetGoalsByType request)
             => RequestHandler.HandleQuery(() => _session.Query(request), _log);
 
 
         [HttpGet]
         [Route("requirements")]
-        public Task<IActionResult> Get(QueryModels.GetVisaRequirements request)
+        public Task<IActionResult> Get(VisaQueryModels.GetRequirements request)
             => RequestHandler.HandleQuery(() => _session.Query(request), _log);
     }
 }

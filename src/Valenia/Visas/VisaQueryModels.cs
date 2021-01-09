@@ -3,21 +3,21 @@ using Valenia.Domain.Visas;
 
 namespace Valenia.Visas
 {
-    public static class QueryModels
+    public static class VisaQueryModels
     {
-        public class GetVisaDetails
+        public class GetDetails
         {
             public Guid VisaId { get; set; }
         }
 
-        public class GetVisaGoalsByType
+        public class GetGoalsByType
         {
             public int Page { get; set; }
             public int PageSize { get; set; }
             public VisaType Type { get; set; }
         }
 
-        public class GetVisaRequirements
+        public class GetRequirements
         {
             public Guid VisaId { get; set; }
         }

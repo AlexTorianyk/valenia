@@ -19,32 +19,43 @@ namespace Valenia.Visas
         }
 
         public Task Handle(object command)
-        =>
-        command switch
-        {
-            VisaCommands.Create cmd =>
-            HandleCreate(cmd),
-            VisaCommands.SetGoal cmd =>
-            HandleUpdate(cmd.Id, v => v.SetGoal(VisaGoal.FromString(cmd.Goal))),
-            VisaCommands.UpdateType cmd =>
-            HandleUpdate(cmd.Id, v => v.UpdateType(cmd.Type)),
-            VisaCommands.SetExpectedProcessingTime cmd =>
-            HandleUpdate(cmd.Id, v => v.SetExpectedProcessingTime(VisaExpectedProcessingTime.FromInt(cmd.ExceptedProcessingTime))),
-            RequirementCommands.AddToVisa cmd =>
-            HandleUpdate(cmd.VisaId, v => v.AddRequirement(RequirementName.FromString(cmd.Name), RequirementDescription.FromString(cmd.Description), RequirementExample.FromString(cmd.Example))),
-            RequirementCommands.UpdateName cmd =>
-            HandleUpdate(cmd.VisaId, v => v.UpdateRequirementName(new RequirementId(cmd.RequirementId), RequirementName.FromString(cmd.Name))),
-            RequirementCommands.UpdateDescription cmd => 
-            HandleUpdate(cmd.VisaId, v => v.UpdateRequirementDescription(new RequirementId(cmd.RequirementId), RequirementDescription.FromString(cmd.Description))),
-            RequirementCommands.UpdateExample cmd =>
-            HandleUpdate(cmd.VisaId, v => v.UpdateRequirementExample(new RequirementId(cmd.RequirementId), RequirementExample.FromString(cmd.Example))),
-            _ => Task.CompletedTask
-        };
+            =>
+                command switch
+                {
+                    VisaCommands.Create cmd =>
+                    HandleCreate(cmd),
+                    VisaCommands.SetGoal cmd =>
+                    HandleUpdate(cmd.Id, v => v.SetGoal(VisaGoal.FromString(cmd.Goal))),
+                    VisaCommands.UpdateType cmd =>
+                    HandleUpdate(cmd.Id, v => v.UpdateType(cmd.Type)),
+                    VisaCommands.SetExpectedProcessingTime cmd =>
+                    HandleUpdate(cmd.Id,
+                        v => v.SetExpectedProcessingTime(
+                            VisaExpectedProcessingTime.FromInt(cmd.ExceptedProcessingTime))),
+                    RequirementCommands.AddToVisa cmd =>
+                    HandleUpdate(cmd.VisaId,
+                        v => v.AddRequirement(RequirementName.FromString(cmd.Name),
+                            RequirementDescription.FromString(cmd.Description),
+                            RequirementExample.FromString(cmd.Example))),
+                    RequirementCommands.UpdateName cmd =>
+                    HandleUpdate(cmd.VisaId,
+                        v => v.UpdateRequirementName(new RequirementId(cmd.RequirementId),
+                            RequirementName.FromString(cmd.Name))),
+                    RequirementCommands.UpdateDescription cmd =>
+                    HandleUpdate(cmd.VisaId,
+                        v => v.UpdateRequirementDescription(new RequirementId(cmd.RequirementId),
+                            RequirementDescription.FromString(cmd.Description))),
+                    RequirementCommands.UpdateExample cmd =>
+                    HandleUpdate(cmd.VisaId,
+                        v => v.UpdateRequirementExample(new RequirementId(cmd.RequirementId),
+                            RequirementExample.FromString(cmd.Example))),
+                    _ => Task.CompletedTask
+                };
         
 
         private async Task HandleCreate(VisaCommands.Create cmd)
         {
-            var visa = new Visa(new VisaId(Guid.NewGuid()), cmd.Type);
+            var visa = new Visa(cmd.Type);
 
             await _repository.Add(visa);
             await _unitOfWork.Commit();
@@ -52,23 +63,15 @@ namespace Valenia.Visas
 
         private async Task HandleUpdate(Guid visaId, Action<Visa> operation)
         {
-            try
-            {
-                var visa = await _repository.Load(visaId.ToString());
+            var visa = await _repository.Load(visaId.ToString());
 
-                if (visa == null)
-                    throw new InvalidOperationException(
-                        $"Entity with id {visaId} cannot be found"
-                    );
+            if (visa == null)
+                throw new InvalidOperationException(
+                    $"Visa with id {visaId} cannot be found"
+                );
 
-                operation(visa);
-                await _unitOfWork.Commit();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            operation(visa);
+            await _unitOfWork.Commit();
         }
     }
 }

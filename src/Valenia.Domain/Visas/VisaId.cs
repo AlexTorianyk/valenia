@@ -11,7 +11,7 @@ namespace Valenia.Domain.Visas
         public VisaId(Guid value)
         {
             if (value == default)
-                throw new ArgumentNullException(nameof(value), "Visa Ad id cannot be empty");
+                throw new ArgumentNullException(nameof(value), "Visa id cannot be empty");
 
             Value = value;
         }
