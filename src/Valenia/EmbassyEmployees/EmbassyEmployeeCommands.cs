@@ -1,9 +1,9 @@
 ﻿using System;
-using Valenia.Domain.EmbassyEmployees;
+using Valenia.Domain.Users.EmbassyEmployees;
 
 namespace Valenia.EmbassyEmployees
 {
-    public class EmbassyEmployeeCommands
+    public static class EmbassyEmployeeCommands
     {
         public class Register
         {

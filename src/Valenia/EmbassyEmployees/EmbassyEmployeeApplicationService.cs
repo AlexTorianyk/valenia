@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Valenia.Common;
-using Valenia.Domain.EmbassyEmployees;
 using Valenia.Domain.Shared;
+using Valenia.Domain.Users.EmbassyEmployees;
+using Valenia.Domain.Users.Shared;
 using Valenia.Infrastructure.Application.AutomaticDependencyInjection;
 
 namespace Valenia.EmbassyEmployees
@@ -35,9 +36,9 @@ namespace Valenia.EmbassyEmployees
 
         private async Task HandleCreate(EmbassyEmployeeCommands.Register cmd)
         {
-            var embassyEmployee = new EmbassyEmployee(EmbassyEmployeeFullName.FromString(cmd.FullName),
-                EmbassyEmployeeEmail.FromString(cmd.Email),
-                EmbassyEmployeePassword.FromString(cmd.Password, _passwordHasher), cmd.Role);
+            var embassyEmployee = new EmbassyEmployee(FullName.FromString(cmd.FullName),
+                Email.FromString(cmd.Email),
+                Password.FromString(cmd.Password, _passwordHasher), cmd.Role);
 
             await _repository.Add(embassyEmployee);
             await _unitOfWork.Commit();

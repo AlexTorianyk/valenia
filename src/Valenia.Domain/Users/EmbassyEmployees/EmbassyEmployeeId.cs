@@ -1,7 +1,7 @@
 ﻿using System;
 using Valenia.Common;
 
-namespace Valenia.Domain.EmbassyEmployees
+namespace Valenia.Domain.Users.EmbassyEmployees
 {
     public class EmbassyEmployeeId : Value<EmbassyEmployeeId>
     {

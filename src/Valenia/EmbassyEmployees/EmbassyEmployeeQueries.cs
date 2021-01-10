@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
-using Valenia.Domain.EmbassyEmployees;
+using Valenia.Domain.Users.EmbassyEmployees;
 
 namespace Valenia.EmbassyEmployees
 {

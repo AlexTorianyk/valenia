@@ -1,4 +1,4 @@
-﻿namespace Valenia.Domain.EmbassyEmployees
+﻿namespace Valenia.Domain.Users.EmbassyEmployees
 {
     public enum EmbassyEmployeeRole
     {
