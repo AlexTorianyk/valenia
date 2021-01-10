@@ -29,9 +29,8 @@ namespace Valenia
                     FindIdentityProperty = x => x.Name == "DbId"
                 }
             };
-            services.AddScoped(c => store.OpenAsyncSession());
             store.Initialize();
-            const string connectionString = "Server=localhost;Database=ValeniaDb;User Id=sa;Password=zaq1@WSX;";
+            services.AddScoped(c => store.OpenAsyncSession());
             services.AddDependencies();
             services.AddControllers();
             services.AddSwagger();

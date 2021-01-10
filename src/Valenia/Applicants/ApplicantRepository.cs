@@ -7,9 +7,7 @@ namespace Valenia.Applicants
 {
     public class ApplicantRepository : RavenDbRepository<Applicant, ApplicantId>, IApplicantRepository, IScoped
     {
-        protected ApplicantRepository(IAsyncDocumentSession session)
-            : base(session, id => $"Applicant/{id.Value}")
-        {
-        }
+        public ApplicantRepository(IAsyncDocumentSession session)
+            : base(session, id => $"Applicant/{id.Value}") { }
     }
 }
