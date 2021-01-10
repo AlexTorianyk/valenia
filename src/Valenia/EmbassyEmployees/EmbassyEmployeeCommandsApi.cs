@@ -24,6 +24,7 @@ namespace Valenia.EmbassyEmployees
             => RequestHandler.HandleCommand(request, _applicationService.Handle, Log);
 
         [HttpPut]
+        [Route("fire")]
         public Task<IActionResult> Put(EmbassyEmployeeCommands.Fire request)
             => RequestHandler.HandleCommand(request, _applicationService.Handle, Log);
     }
