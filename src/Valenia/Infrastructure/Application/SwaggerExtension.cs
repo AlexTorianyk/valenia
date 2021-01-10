@@ -37,7 +37,6 @@ namespace Valenia.Infrastructure.Application
                 });
             });
 
-            services.AddSwaggerGenNewtonsoftSupport();
         }
 
         public static void UseSwaggerUI(this IApplicationBuilder app)
