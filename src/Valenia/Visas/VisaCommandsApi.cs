@@ -19,23 +19,23 @@ namespace Valenia.Visas
         public Task<IActionResult> Post(VisaCommands.Create request)
             => RequestHandler.HandleCommand(request, _applicationService.Handle, Log);
 
-        [Route("goal")]
         [HttpPut]
+        [Route("goal")]
         public Task<IActionResult> Put(VisaCommands.SetGoal request)
             => RequestHandler.HandleCommand(request, _applicationService.Handle, Log);
 
-        [Route("type")]
         [HttpPut]
+        [Route("type")]
         public Task<IActionResult> Put(VisaCommands.UpdateType request)
             => RequestHandler.HandleCommand(request, _applicationService.Handle, Log);
 
-        [Route("processing-time")]
         [HttpPut]
+        [Route("processing-time")]
         public Task<IActionResult> Put(VisaCommands.SetExpectedProcessingTime request)
             => RequestHandler.HandleCommand(request, _applicationService.Handle, Log);
 
-        [Route("requirement")]
         [HttpPost]
+        [Route("requirement")]
         public Task<IActionResult> Post(RequirementCommands.AddToVisa request)
             => RequestHandler.HandleCommand(request, _applicationService.Handle, Log);
 
