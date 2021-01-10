@@ -21,7 +21,7 @@ namespace Valenia.Applicants
                         new ApplicantReadModels.Details
                         {
                             ApplicantId = x.Id.Value,
-                            FullName = x.FullName.Value,
+                            FullName = x.FullName.Value
                         }
                 ).ToListAsync();
         }

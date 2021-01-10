@@ -22,7 +22,7 @@ namespace Valenia.EmbassyEmployees
                         {
                             EmbassyEmployeeId = x.Id.Value,
                             FullName = x.FullName.Value,
-                            Role = x.Role,
+                            Role = x.Role
                         }
                 ).ToListAsync();
         }

@@ -18,7 +18,7 @@ namespace Valenia.Domain.Users.Applicants
                 Id = Guid.NewGuid(),
                 FullName = fullName,
                 Email = email,
-                Password = password,
+                Password = password
             });
         }
 
