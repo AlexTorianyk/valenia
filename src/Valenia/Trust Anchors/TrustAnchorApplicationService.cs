@@ -24,7 +24,7 @@ namespace Valenia.Trust_Anchors
                     TrustAnchorCommands.Register cmd =>
                     HandleCreate(cmd),
                     TrustAnchorCommands.UpdateConfiguration cmd =>
-                    HandleUpdate(cmd.DID, t => t.UpdateConfiguration(TrustAnchorName.FromString(cmd.Name), cmd.Url)),
+                    HandleUpdate(cmd.DID, t => t.UpdateConfiguration(TrustAnchorName.FromString(cmd.Name), cmd.LogoUrl)),
                     _ => Task.CompletedTask
                 };
 
