@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using Valenia.Infrastructure.Application;
 
-namespace Valenia.Verity.Context
+namespace Valenia.Verity.Contexts
 {
     [Route("/context")]
     public class ContextCommandsApi : Controller

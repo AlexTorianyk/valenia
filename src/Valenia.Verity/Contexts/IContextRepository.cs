@@ -1,4 +1,4 @@
-﻿namespace Valenia.Verity.Context
+﻿namespace Valenia.Verity.Contexts
 {
     public interface IContextRepository
     {

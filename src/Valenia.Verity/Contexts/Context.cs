@@ -1,6 +1,6 @@
 ﻿using Valenia.Common;
 
-namespace Valenia.Verity.Context
+namespace Valenia.Verity.Contexts
 {
     public class Context : Value<Context>
     {

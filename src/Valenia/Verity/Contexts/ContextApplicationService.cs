@@ -4,7 +4,7 @@ using Valenia.Infrastructure.Application.AutomaticDependencyInjection;
 using VeritySDK.Protocols.Provision;
 using VeritySDK.Utils;
 
-namespace Valenia.Verity.Context
+namespace Valenia.Verity.Contexts
 {
     public class ContextApplicationService : IApplicationService, IScoped
     {

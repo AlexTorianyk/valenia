@@ -9,10 +9,10 @@ namespace Valenia.Domain.Visas
 {
     public class Visa : AggregateRoot<VisaId>
     {
-        public VisaGoal Goal { get; set; }
-        public VisaType Type { get; set; }
-        public VisaExpectedProcessingTime ExpectedProcessingTime { get; set; }
-        public List<Requirement> Requirements { get; set; }
+        public VisaGoal Goal { get; private set; }
+        public VisaType Type { get; private set; }
+        public VisaExpectedProcessingTime ExpectedProcessingTime { get; private set; }
+        public List<Requirement> Requirements { get; private set; }
 
         public Visa(VisaType type)
         {

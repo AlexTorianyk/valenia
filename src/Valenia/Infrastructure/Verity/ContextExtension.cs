@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Valenia.Verity.Context;
+using Valenia.Verity.Contexts;
 
 namespace Valenia.Infrastructure.Verity
 {

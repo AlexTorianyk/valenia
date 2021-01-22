@@ -3,7 +3,7 @@ using System.IO;
 using Valenia.Infrastructure.Application.AutomaticDependencyInjection;
 using VeritySDK.Utils;
 
-namespace Valenia.Verity.Context
+namespace Valenia.Verity.Contexts
 {
     public class ContextRepository : IContextRepository, IScoped
     {
