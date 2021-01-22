@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Valenia.Common\Valenia.Common.csproj" />
     <ProjectReference Include="..\Valenia.Domain\Valenia.Domain.csproj" />
+    <ProjectReference Include="..\Valenia.Verity\Valenia.Verity.csproj" />
   </ItemGroup>
 
 
