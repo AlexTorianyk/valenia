@@ -9,7 +9,7 @@ namespace Valenia.Visas
 {
     public static class VisaQueries
     {
-        public static Task<List<VisaReadModels.Details>> Query(
+        public static Task<VisaReadModels.Details> Query(
             this IAsyncDocumentSession session,
             VisaQueryModels.GetDetails query
         )
@@ -25,7 +25,7 @@ namespace Valenia.Visas
                             Type = x.Type,
                             ExpectedProcessingTime = x.ExpectedProcessingTime.Days
                         }
-                ).ToListAsync();
+                ).SingleAsync();
         }
 
         public static Task<List<VisaReadModels.Goals>> Query(

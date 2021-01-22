@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
@@ -9,7 +8,7 @@ namespace Valenia.EmbassyEmployees
 {
     public static class EmbassyEmployeeQueries
     {
-        public static Task<List<EmbassyEmployeeReadModels.Details>> Query(
+        public static Task<EmbassyEmployeeReadModels.Details> Query(
             this IAsyncDocumentSession session,
             EmbassyEmployeeQueryModels.GetDetails query
         )
@@ -24,7 +23,7 @@ namespace Valenia.EmbassyEmployees
                             FullName = x.FullName.Value,
                             Role = x.Role
                         }
-                ).ToListAsync();
+                ).SingleAsync();
         }
     }
 }
