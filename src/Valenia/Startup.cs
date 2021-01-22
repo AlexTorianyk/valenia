@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Raven.Client.Documents;
 using Valenia.Infrastructure.Application;
 using Valenia.Infrastructure.Application.AutomaticDependencyInjection;
+using Valenia.Infrastructure.Verity;
 
 namespace Valenia
 {
@@ -35,7 +36,8 @@ namespace Valenia
             services.AddDependencies();
             services.AddControllers().AddJsonOptions(options =>
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
-            services.AddSwagger();
+            services.AddSwagger(); 
+            services.AddContext();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

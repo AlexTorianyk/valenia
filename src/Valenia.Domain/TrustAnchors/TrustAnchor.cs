@@ -28,7 +28,6 @@ namespace Valenia.Domain.TrustAnchors
             });
         }
 
-
         protected override void When(object @event)
         {
             switch (@event)

@@ -7,13 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8FA50CC2-C52
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{208A241A-7A1D-4F64-8D55-A7C690B38932}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valenia.Domain", "src\Valenia.Domain\Valenia.Domain.csproj", "{57E1FC02-4EEC-4AC4-9FDC-9044A1C3946E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Valenia.Domain", "src\Valenia.Domain\Valenia.Domain.csproj", "{57E1FC02-4EEC-4AC4-9FDC-9044A1C3946E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valenia.Common", "src\Valenia.Common\Valenia.Common.csproj", "{7F047800-AB27-45E1-A42E-E296EE94F9AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Valenia.Common", "src\Valenia.Common\Valenia.Common.csproj", "{7F047800-AB27-45E1-A42E-E296EE94F9AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valenia.Tests", "tests\Valenia.Tests\Valenia.Tests.csproj", "{8DBEF585-B79D-4CD1-A148-F51F9E1DEED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Valenia.Tests", "tests\Valenia.Tests\Valenia.Tests.csproj", "{8DBEF585-B79D-4CD1-A148-F51F9E1DEED6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Valenia", "src\Valenia\Valenia.csproj", "{A635A5FF-DDDB-4A9D-A491-109F1639A0DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Valenia.Verity", "src\Valenia.Verity\Valenia.Verity.csproj", "{66AAE957-EF43-4762-91FB-ABCA9AB60552}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{A635A5FF-DDDB-4A9D-A491-109F1639A0DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A635A5FF-DDDB-4A9D-A491-109F1639A0DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A635A5FF-DDDB-4A9D-A491-109F1639A0DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{66AAE957-EF43-4762-91FB-ABCA9AB60552}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66AAE957-EF43-4762-91FB-ABCA9AB60552}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66AAE957-EF43-4762-91FB-ABCA9AB60552}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66AAE957-EF43-4762-91FB-ABCA9AB60552}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{7F047800-AB27-45E1-A42E-E296EE94F9AE} = {8FA50CC2-C52D-4256-A8DF-D279F7C99A20}
 		{8DBEF585-B79D-4CD1-A148-F51F9E1DEED6} = {208A241A-7A1D-4F64-8D55-A7C690B38932}
 		{A635A5FF-DDDB-4A9D-A491-109F1639A0DA} = {8FA50CC2-C52D-4256-A8DF-D279F7C99A20}
+		{66AAE957-EF43-4762-91FB-ABCA9AB60552} = {8FA50CC2-C52D-4256-A8DF-D279F7C99A20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3AD2505D-4D3E-48EA-BF51-81124D7F49A9}

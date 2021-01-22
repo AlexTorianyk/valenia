@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Raven.Client.Documents;
 using Raven.Client.Documents.Session;
@@ -9,7 +8,7 @@ namespace Valenia.Applicants
 {
     public static class ApplicantQueries
     {
-        public static Task<List<ApplicantReadModels.Details>> Query(
+        public static Task<ApplicantReadModels.Details> Query(
             this IAsyncDocumentSession session,
             ApplicantQueryModels.GetDetails query
         )
@@ -23,7 +22,7 @@ namespace Valenia.Applicants
                             ApplicantId = x.Id.Value,
                             FullName = x.FullName.Value
                         }
-                ).ToListAsync();
+                ).SingleAsync();
         }
     }
 }

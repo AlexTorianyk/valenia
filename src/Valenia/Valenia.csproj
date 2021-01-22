@@ -8,10 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
     <PackageReference Include="RavenDB.Client" Version="5.1.2" />
     <PackageReference Include="Scrutor" Version="3.3.0" />
@@ -24,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Valenia.Common\Valenia.Common.csproj" />
     <ProjectReference Include="..\Valenia.Domain\Valenia.Domain.csproj" />
+    <ProjectReference Include="..\Valenia.Verity\Valenia.Verity.csproj" />
   </ItemGroup>
 
 
