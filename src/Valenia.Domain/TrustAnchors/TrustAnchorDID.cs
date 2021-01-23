@@ -22,6 +22,14 @@ namespace Valenia.Domain.TrustAnchors
 
         }
 
+        public static TrustAnchorDID FromString(string trustAnchorDID)
+        {
+            if (trustAnchorDID.IsEmpty())
+                throw new ArgumentNullException(nameof(trustAnchorDID));
+
+            return new TrustAnchorDID(trustAnchorDID);
+        }
+
         public static implicit operator string(TrustAnchorDID self) => self.Value;
     }
 }
