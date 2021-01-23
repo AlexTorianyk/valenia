@@ -2,7 +2,7 @@
 
 namespace Valenia.Verity.Handlers
 {
-    public class WriteSchemaHandler : BaseHandler
+    public class WriteSchemaHandler
     {
         public WriteSchemaHandler(string schemaName, string schemaVersion, string[] parameters)
         {
@@ -14,6 +14,11 @@ namespace Valenia.Verity.Handlers
                     var schemaIdRef = message["schemaId"];
                 }
             };
+        }
+
+        protected override void SetUp()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

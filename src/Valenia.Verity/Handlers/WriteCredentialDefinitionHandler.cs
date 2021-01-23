@@ -2,7 +2,7 @@
 
 namespace Valenia.Verity.Handlers
 {
-    public class WriteCredentialDefinitionHandler : BaseHandler
+    public class WriteCredentialDefinitionHandler
     {
         public WriteCredentialDefinitionHandler(string credentialDefinitionName, string schemaIdReference, string credentialDefinitionTag)
         {
@@ -14,6 +14,11 @@ namespace Valenia.Verity.Handlers
                     var defIdRef = message["credDefId"];
                 }
             };
+        }
+
+        protected override void SetUp()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }
