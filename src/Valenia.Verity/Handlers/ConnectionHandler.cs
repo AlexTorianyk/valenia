@@ -2,7 +2,7 @@
 
 namespace Valenia.Verity.Handlers
 {
-    public class ConnectionHandler : BaseHandler
+    public class ConnectionHandler
     {
         public ConnectionHandler()
         {
@@ -18,6 +18,11 @@ namespace Valenia.Verity.Handlers
                     var startResponse = true;
                 }
             };
+        }
+
+        protected override void SetUp()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

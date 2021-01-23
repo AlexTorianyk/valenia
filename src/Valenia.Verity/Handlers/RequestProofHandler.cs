@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using VeritySDK.Protocols.IssuerSetup;
-using VeritySDK.Protocols.PresentProof;
-using VeritySDK.Utils;
+﻿using VeritySDK.Protocols.PresentProof;
 using Attribute = VeritySDK.Protocols.PresentProof.Attribute;
 
 namespace Valenia.Verity.Handlers
 {
-    public class RequestProofHandler : BaseHandler
+    public class RequestProofHandler
     {
         public RequestProofHandler(string relationshipDID, string proofName, Attribute[] attributes)
         {
@@ -20,6 +15,11 @@ namespace Valenia.Verity.Handlers
                     var proofComplete = true;
                 }
             };
+        }
+
+        protected override void SetUp()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

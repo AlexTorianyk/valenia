@@ -9,7 +9,7 @@ namespace Valenia.Infrastructure.Persistence
         where T : AggregateRoot<TId>
         where TId : Value<TId>
     {
-        private readonly IAsyncDocumentSession _session;
+        protected readonly IAsyncDocumentSession _session;
         private readonly Func<TId, string> _entityId;
 
         protected RavenDbRepository(

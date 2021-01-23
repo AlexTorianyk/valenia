@@ -3,7 +3,7 @@ using VeritySDK.Protocols.IssueCredential;
 
 namespace Valenia.Verity.Handlers
 {
-    public class IssueCredentialHandler : BaseHandler
+    public class IssueCredentialHandler
     {
         public IssueCredentialHandler(string relationshipDID, string _defIdRef, Dictionary<string, string> credentialData, string credentialName)
         {
@@ -19,6 +19,11 @@ namespace Valenia.Verity.Handlers
                     var credSent = true;
                 }
             };
+        }
+
+        protected override void SetUp()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

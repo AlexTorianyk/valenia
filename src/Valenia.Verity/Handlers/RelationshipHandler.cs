@@ -1,44 +1,58 @@
-﻿using System.Drawing.Imaging;
-using System.IO;
-using QRCoder;
-using VeritySDK.Protocols.Relationship;
+﻿using QRCoder;
+using Valenia.Common;
+using Valenia.Domain.TrustAnchors;
+using Valenia.Verity.Relationships;
+using VeritySDK.Handler;
+using VeritySDK.Protocols;
 using VeritySDK.Utils;
+using Relationship = Valenia.Verity.Relationships.Relationship;
 
 namespace Valenia.Verity.Handlers
 {
-    public class RelationshipHandler : BaseHandler
+    public class RelationshipHandler
     {
-        public RelationshipHandler(string name = "Opole University of Technology")
+        private readonly IRelationshipRepository _repository;
+        private readonly IUnitOfWork _unitOfWork;
+        private MessageFamily _handler { get; set; }
+        private MessageHandler.Handler _messageHandler { get; set; }
+
+        public RelationshipHandler(IRelationshipRepository repository, IUnitOfWork unitOfWork)
         {
-            Handler = Relationship.v1_0("relationship");
-            MessageHandler = (messageName, message) =>
+            _repository = repository;
+            _unitOfWork = unitOfWork;
+        }
+
+        public virtual void SetUp(MessageFamily handler, string trustAnchorDID)
+        {
+            _handler = handler;
+            _messageHandler = async (messageName, message) =>
             {
                 if ("created".Equals(messageName))
                 {
+                    var threadId = message.GetValue("~thread")["thid"];
+                    var relationshipDID = message.GetValue("did");
 
-                    var json_thread = message.GetValue("~thread")["thid"];
-
-                    var threadId = json_thread;
-                    var relDID = message.GetValue("did");
-
+                    var relationship = new Relationship(relationshipDID.ToString(), threadId.ToString(), trustAnchorDID);
+                    await _repository.Add(relationship);
+                    await _unitOfWork.Commit();
                 }
                 else if ("invitation".Equals(messageName))
                 {
+                    var relationship =
+                        await _repository.LoadByTrustAnchorDID(TrustAnchorDID.FromString(trustAnchorDID));
                     string inviteURL = message.GetValue("inviteURL");
+                    relationship.SetInviteUrl(inviteURL);
+                    await _unitOfWork.Commit();
 
-                    try
-                    {
-                        var qrGenerator = new QRCodeGenerator();
-                        var qrCodeData = qrGenerator.CreateQrCode(inviteURL, QRCodeGenerator.ECCLevel.L);
-                        var qrCode = new QRCode(qrCodeData);
-                        var qrCodeImage = qrCode.GetGraphic(4);
-                        qrCodeImage.Save("qrcode.png", ImageFormat.Png);
-                    }
-                    catch (FileNotFoundException e)
-                    {
-                    }
+                    var qrGenerator = new QRCodeGenerator();
+                    var qrCodeData = qrGenerator.CreateQrCode(inviteURL, QRCodeGenerator.ECCLevel.L);
+                    var qrCode = new QRCode(qrCodeData);
+                    var qrCodeImage = qrCode.GetGraphic(4);
+                    relationship.GenerateQrCode(qrCodeImage);
+                    await _unitOfWork.Commit();
                 }
             };
         }
+
     }
 }
