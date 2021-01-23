@@ -5,7 +5,7 @@
         public class Register
         {
         }
-
+        
         public class UpdateConfiguration
         {
             public string DID { get; set; }
