@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Valenia.Domain.Applications;
 using Valenia.Domain.Shared.Exceptions;
 using Valenia.Domain.Users.Applicants;
