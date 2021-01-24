@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Valenia.Domain.TrustAnchors;
 
 namespace Valenia.Verity.Relationships
 {
@@ -7,6 +6,6 @@ namespace Valenia.Verity.Relationships
     {
         Task<Relationship> Load(RelationshipDID did);
         Task Add(Relationship entity);
-        Task<Relationship> LoadByTrustAnchorDID(TrustAnchorDID did);
+        Task<Relationship> LoadByTrustAnchorDID(string did);
     }
 }
