@@ -1,14 +1,19 @@
 ﻿using System.Collections.Generic;
+using VeritySDK.Handler;
+using VeritySDK.Protocols;
 using VeritySDK.Protocols.IssueCredential;
 
 namespace Valenia.Verity.Handlers
 {
     public class IssueCredentialHandler
     {
+        private MessageFamily _handler;
+        private MessageHandler.Handler _messageHandler;
+
         public IssueCredentialHandler(string relationshipDID, string _defIdRef, Dictionary<string, string> credentialData, string credentialName)
         {
-            Handler = IssueCredential.v1_0(relationshipDID, _defIdRef, credentialData, credentialName, "0", true);
-            MessageHandler = (messageName, message) =>
+            _handler = IssueCredential.v1_0(relationshipDID, _defIdRef, credentialData, credentialName, "0", true);
+            _messageHandler = (messageName, message) =>
             {
                 if ("sent".Equals(messageName))
                 {
@@ -19,11 +24,6 @@ namespace Valenia.Verity.Handlers
                     var credSent = true;
                 }
             };
-        }
-
-        protected override void SetUp()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

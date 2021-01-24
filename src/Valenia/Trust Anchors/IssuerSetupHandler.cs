@@ -11,8 +11,8 @@ namespace Valenia.Trust_Anchors
     {
         private readonly ITrustAnchorRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
-        private MessageFamily _handler { get; set; }
-        private MessageHandler.Handler _messageHandler { get; set; }
+        private MessageFamily _handler;
+        private MessageHandler.Handler _messageHandler;
 
         public IssuerSetupHandler(ITrustAnchorRepository repository, IUnitOfWork unitOfWork)
         {

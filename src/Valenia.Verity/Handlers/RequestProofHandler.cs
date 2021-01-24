@@ -1,25 +1,24 @@
-﻿using VeritySDK.Protocols.PresentProof;
-using Attribute = VeritySDK.Protocols.PresentProof.Attribute;
+﻿using VeritySDK.Handler;
+using VeritySDK.Protocols;
+using VeritySDK.Protocols.PresentProof;
 
 namespace Valenia.Verity.Handlers
 {
     public class RequestProofHandler
     {
+        private MessageFamily _handler;
+        private MessageHandler.Handler _messageHandler;
+
         public RequestProofHandler(string relationshipDID, string proofName, Attribute[] attributes)
         {
-            Handler = PresentProof.v1_0(relationshipDID, proofName, attributes);
-            MessageHandler = (messageName, message) =>
+            _handler = PresentProof.v1_0(relationshipDID, proofName, attributes);
+            _messageHandler = (messageName, message) =>
             {
                 if ("presentation-result".Equals(messageName))
                 {
                     var proofComplete = true;
                 }
             };
-        }
-
-        protected override void SetUp()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

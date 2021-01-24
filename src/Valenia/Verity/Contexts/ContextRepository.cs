@@ -20,7 +20,7 @@ namespace Valenia.Verity.Contexts
 
                 return new Context(context);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return null;
             }
