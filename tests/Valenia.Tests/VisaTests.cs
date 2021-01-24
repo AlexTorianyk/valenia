@@ -7,7 +7,7 @@ namespace Valenia.Tests
 {
     public class VisaTests
     {
-        public class Created : VisaTests
+        public class Create : VisaTests
         {
             [Fact]
             public void CreateVisa_ValidParameters()

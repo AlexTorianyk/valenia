@@ -1,7 +1,9 @@
 ﻿using Valenia.Common;
 using Valenia.Domain.TrustAnchors;
 using Valenia.Infrastructure.Application.AutomaticDependencyInjection;
+using VeritySDK.Handler;
 using VeritySDK.Protocols;
+using VeritySDK.Utils;
 
 namespace Valenia.Trust_Anchors
 {
@@ -9,6 +11,8 @@ namespace Valenia.Trust_Anchors
     {
         private readonly ITrustAnchorRepository _repository;
         private readonly IUnitOfWork _unitOfWork;
+        private MessageFamily _handler { get; set; }
+        private MessageHandler.Handler _messageHandler { get; set; }
 
         public IssuerSetupHandler(ITrustAnchorRepository repository, IUnitOfWork unitOfWork)
         {
@@ -18,8 +22,8 @@ namespace Valenia.Trust_Anchors
 
         public virtual void SetUp(MessageFamily handler)
         {
-            Handler = handler;
-            MessageHandler = async (messageName, message) =>
+            _handler = handler;
+            _messageHandler = async (messageName, message) =>
             {
                 if ("public-identifier-created".Equals(messageName))
                 {

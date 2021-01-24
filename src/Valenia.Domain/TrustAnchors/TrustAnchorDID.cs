@@ -19,7 +19,6 @@ namespace Valenia.Domain.TrustAnchors
         {
             if (value.IsEmpty())
                 throw new ArgumentNullException(nameof(value), "Trust anchor did cannot be empty");
-
         }
 
         public static TrustAnchorDID FromString(string trustAnchorDID)
